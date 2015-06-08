@@ -1,0 +1,94 @@
+<!doctype html>
+
+<html ng-app="store"> <!-- esta directiva ejecuta el módulo store al inicializarse la aplicación -->
+
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/example4/product.css">
+
+</head>
+
+<!-- esta directiva hace que se ejecute el método StoreController, asignando un alias para obtener sus variables -->
+
+<body ng-controller="StoreController as store"> <!-- IMP: fuera de este div no tendremos acceso a estas propiedades, ya que el ámbito del controlador queda asociado al elemento que lo invoca -->
+
+    <h1>Hola {{store.userName}}</h1>
+
+    <ul class="list-group">
+
+        <!-- esta directiva repite el código que se encuentra dentro del bloque por cada elemento encontrado,
+             adicionalmente se aplica un filtro para limitar los resultados mostrados a 3 ordenador por precio
+             de manera ascendente (con un - delante de price se ordenaría de manera descendente -->
+
+        <li ng-repeat="product in store.products | limitTo:3 | orderBy:'+price'">
+
+            <div class="product" ng-hide="store.product.soldOut"> <!-- esta directiva oculta el producto si está agotado -->
+
+                <!-- uppercase es un filtro para capitalizar los datos mostrados -->
+                <!-- currency es un filtro para dar formato de moneda a los datos mostrados -->
+
+                <h2>{{product.name | uppercase}} <em class="pull-right">{{product.price | currency}}</em></h2>
+
+                <img src="{{product.images.thumb}}">
+
+                <button ng-show="product.canPurchase">Add to cart</button> <!-- esta directiva hace visible este elemento si la expresión es verdadera -->
+
+                <section ng-init="tab = 1"> <!-- inicializamos la variable tab para que antes de hacer click en una pestaña ya pueda mostrar alguna sección -->
+
+                    <ul class="nav nav-pills">
+
+                        <li ng-class="{active:tab === 1}"> <!-- esta directiva añade la clase active si la variable tab tiene valor 1, su estructura es {nombre de la clase a asignar}:{expresion} -->
+                            <a ng-click="tab = 1" href="#">Description</a> <!-- se asigna un valor a una propiedad en cada uno de los clicks -->
+                        </li>
+
+                        <li ng-class="{active:tab === 2}">
+                            <a ng-click="tab = 2" href="#">Specifications</a>
+                        </li>
+
+                        <li ng-class="{active:tab === 3}">
+                            <a ng-click="tab = 3" href="#">Reviews</a>
+                        </li>
+
+                    </ul>
+
+                </section>
+
+                <div class="panel" ng-show="tab === 1">
+
+                    <h3>Description</h3>
+
+                    <p>{{product.description}}</p>
+
+                </div>
+
+                <div class="panel" ng-show="tab === 2">
+
+                    <h3>Specifications</h3>
+
+                    <p>None yet</p>
+
+                </div>
+
+                <div class="panel" ng-show="tab === 3">
+
+                    <h3>Reviews</h3>
+
+                    <p>None yet</p>
+
+                </div>
+
+            </div>
+
+        </li>
+
+    </ul>
+
+</body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+
+    <script src="/js/example4/app.js"></script>
+
+</html>

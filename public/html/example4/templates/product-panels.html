@@ -1,0 +1,102 @@
+<section>
+
+    <ul class="nav nav-pills">
+
+        <li ng-class="{active:panel.isSelected(1)}"> <!-- esta directiva añade la clase active si la variable tab tiene valor 1, su estructura es {nombre de la clase a asignar}:{expresion} -->
+            <a ng-click="panel.selectTab(1)" href="#">Description</a> <!-- se asigna un valor a una propiedad en cada uno de los clicks -->
+        </li>
+
+        <li ng-class="{active:panel.isSelected(2)}">
+            <a ng-click="panel.selectTab(2)" href="#">Specifications</a>
+        </li>
+
+        <li ng-class="{active:panel.isSelected(3)}">
+            <a ng-click="panel.selectTab(3)" href="#">Reviews</a>
+        </li>
+
+    </ul>
+
+    <div class="panel" ng-show="panel.isSelected(1)">
+
+        <h3>Description</h3>
+
+        <p>{{product.description}}</p>
+
+    </div>
+
+    <div class="panel" ng-show="panel.isSelected(2)">
+
+        <h3>Specifications</h3>
+
+        <p>None yet</p>
+
+    </div>
+
+    <div class="panel" ng-show="panel.isSelected(3)">
+
+        <h3>Reviews</h3>
+
+        <ul>
+
+            <li ng-repeat="review in product.reviews">
+
+                <p>Stars: {{review.stars}}</p>
+                <blockquote>{{review.body}}</blockquote>
+                <cite>{{review.author}}</cite>
+
+            </li>
+
+        </ul>
+
+        <!-- se asocia el controlador al formulario y mediante la directiva ng-submit se llama
+             a la función adecuada del controlador en el momento en el que se envía el formulario,
+             siempre que la validación haya sido correcta -->
+
+        <!-- la directiva novalidate elimina la validación HTML por defecto -->
+
+        <form name="reviewForm"
+              ng-controller="ReviewFormController as reviewCtrl"
+              ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)"
+              novalidate>
+
+            <!-- previsualización del comentario que se está introduciendo -->
+
+            <div>
+
+                <p>Stars: {{reviewCtrl.review.stars}}</p>
+                <blockquote>{{reviewCtrl.review.body}}</blockquote>
+                <cite>{{reviewCtrl.review.author}}</cite>
+
+            </div>
+
+            <!-- la directiva ng-model asocia un modelo al formulario, que a la vez está conectado con el bloque de previsualización -->
+
+            <select ng-model="reviewCtrl.review.stars" required>
+
+                <option value="1">1 star</option>
+                <option value="2">2 star</option>
+                <option value="3">3 star</option>
+                <option value="4">4 star</option>
+                <option value="5">5 star</option>
+
+            </select>
+
+            <br>
+
+            <textarea ng-model="reviewCtrl.review.body" required></textarea>
+
+            <br>
+
+            <label>by:</label><input type="email" ng-model="reviewCtrl.review.author" required />
+
+            <br>
+
+            <div>Review Form is {{reviewForm.$valid}}</div>
+
+            <input type="submit" value="Review" />
+
+        </form>
+
+    </div>
+
+</section>

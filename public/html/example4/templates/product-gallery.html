@@ -1,0 +1,21 @@
+<ul class="list-group">
+
+    <!-- esta directiva repite el código que se encuentra dentro del bloque por cada elemento encontrado,
+         adicionalmente se aplica un filtro para limitar los resultados mostrados a 3 ordenador por precio
+         de manera ascendente (con un - delante de price se ordenaría de manera descendente -->
+
+    <li ng-repeat="product in store.products | limitTo:3 | orderBy:'+price'">
+
+        <div class="product" ng-hide="product.soldOut"> <!-- esta directiva oculta el producto si está agotado -->
+
+            <product-title></product-title> <!-- directiva personalizada -->
+
+            <button ng-show="product.canPurchase">Add to cart</button> <!-- esta directiva hace visible este elemento si la expresión es verdadera -->
+
+            <product-panels></product-panels>
+
+        </div>
+
+    </li>
+
+</ul>

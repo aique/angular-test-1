@@ -1,0 +1,6 @@
+<!-- uppercase es un filtro para capitalizar los datos mostrados -->
+<!-- currency es un filtro para dar formato de moneda a los datos mostrados -->
+
+<h2>{{product.name | uppercase}} <em class="pull-right">{{product.price | currency}}</em></h2>
+
+<img ng-src="{{product.images[0].thumb}}"> <!-- se ha de usar la directiva ng-src o de lo contrario el navegador intentará cargar la imagen antes de evaluar la expresión -->

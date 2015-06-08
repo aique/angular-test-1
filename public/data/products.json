@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Dodecahedron",
+    "price": 2,
+    "description": "...",
+    "images":
+    [
+      {
+        "full": "/img/example4/gems/dodecahedron.png",
+        "thumb": "/img/example4/gems/dodecahedron_thumb.png"
+      }
+    ],
+    "reviews":
+    [
+      {
+        "stars": 5,
+        "body": "I love this product!",
+        "author": "aique@mail.com"
+      },
+      {
+        "stars": 2,
+        "body": "This product sucks",
+        "author": "paco@mail.com"
+      }
+    ],
+    "canPurchase": true,
+    "soldOut": false
+  },
+  {
+    "name": "Pentagonal Gem",
+    "price": 5.95,
+    "description": "...",
+    "reviews":
+    [
+      {
+        "stars": 4,
+        "body": "Good but not the best",
+        "author": "maria@mail.com"
+      }
+    ],
+    "canPurchase": true,
+    "soldOut": false
+  }
+]
